@@ -1,1 +1,1 @@
-exports.context = { repo: { repo: 'grafan', owner: 'grafana' } }
+exports.context = { repo: { repo: 'grafana-github-actions', owner: 'wangyuan249' } }
