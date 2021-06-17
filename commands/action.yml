@@ -3,7 +3,7 @@ description: Respond to commands given in the form of either labels or comments 
 inputs:
   token:
     description: GitHub token with issue, comment, and label read/write permissions. Requires metadata permissions to be able to check whether author is member of organization.
-    default: "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"
+    default: "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" # "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"
 #    default: ${{ github.token }}
   configPath:
     description: Name of .json file (no extension) in .github/ directory of repo holding configuration for this action
