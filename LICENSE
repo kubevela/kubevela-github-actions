@@ -1,8 +1,14 @@
-Copyright for portions of grafana-github-actions are held by [Microsoft Corporation, 2020] as part of project https://github.com/microsoft/vscode-github-triage-actions. All other copyright for project grafana-github-actions are held by [Grafana Labs 2020].
+Copyright for portions of Kubevela-github-actions are held by
+[Microsoft Corporation, 2020] and [Grafana Labs, 2020] as part of project
+https://github.com/microsoft/vscode-github-triage-actions.
+https://github.com/grafana/grafana-github-actions.
+
+All other copyright for project Kubevela-github-actions are held by
+[oam-dev Organization 2021].
 
     MIT License
 
-    Copyright (c) Grafana Labs.
+    Copyright (c) oam-dev Organization.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

@@ -65,7 +65,7 @@ class TestbedIssue extends Testbed {
         issueConfig.comments = (_a = issueConfig === null || issueConfig === void 0 ? void 0 : issueConfig.comments) !== null && _a !== void 0 ? _a : [];
         issueConfig.labels = (_b = issueConfig === null || issueConfig === void 0 ? void 0 : issueConfig.labels) !== null && _b !== void 0 ? _b : [];
         issueConfig.issue = {
-            author: { name: 'JacksonKearl' },
+            author: { name: 'wangyuan249' },
             body: 'issue body',
             locked: false,
             numComments: ((_c = issueConfig === null || issueConfig === void 0 ? void 0 : issueConfig.comments) === null || _c === void 0 ? void 0 : _c.length) || 0,

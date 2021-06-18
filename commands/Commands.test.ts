@@ -10,18 +10,18 @@ import { Command, Commands } from './Commands'
 describe('Commands', () => {
 	describe('Comments', () => {
 		it('Close (team member)', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [{ type: 'comment', action: 'close', allowUsers: [], name: 'hello' }]
 
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'NotJacksonKearl' },
+				user: { name: 'Notwangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 		})
@@ -29,18 +29,18 @@ describe('Commands', () => {
 		it('Close (allowed third party)', async () => {
 			const testbed = new TestbedIssue()
 			const commands: Command[] = [
-				{ type: 'comment', action: 'close', allowUsers: ['JacksonKearl'], name: 'hello' },
+				{ type: 'comment', action: 'close', allowUsers: ['wangyuan249'], name: 'hello' },
 			]
 
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'NotJacksonKearl' },
+				user: { name: 'Notwangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 		})
@@ -68,12 +68,12 @@ describe('Commands', () => {
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'NotJacksonKearl' },
+				user: { name: 'Notwangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 		})
@@ -93,7 +93,7 @@ describe('Commands', () => {
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(true)
 		})
@@ -113,13 +113,13 @@ describe('Commands', () => {
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(true)
 		})
 
 		it('Update Labels', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] }, { labels: ['old', 'veryOld'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] }, { labels: ['old', 'veryOld', 'author/kubevela'] })
 			const commands: Command[] = [
 				{
 					type: 'comment',
@@ -135,38 +135,38 @@ describe('Commands', () => {
 
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'NotJacksonKearl' },
+				user: { name: 'Notwangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).labels).to.contain('old')
 			expect((await testbed.getIssue()).labels).not.to.contain('new')
 
 			await new Commands(testbed, commands, {
 				comment: '/hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).labels).not.to.contain('old')
 			expect((await testbed.getIssue()).labels).to.contain('new')
 		})
 
 		it('Prefix matches', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [{ type: 'comment', action: 'close', allowUsers: [], name: 'hello' }]
 
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/helloworld',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '\\hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 		})
 
 		it('Regex Escapes', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [
 				{ type: 'comment', action: 'close', allowUsers: [], name: 'c++iscool' },
 			]
@@ -174,41 +174,41 @@ describe('Commands', () => {
 			expect((await testbed.getIssue()).open).to.equal(true)
 			await new Commands(testbed, commands, {
 				comment: '/c++iscool',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 		})
 
 		it('adds labels to issues with /label comment', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [{ type: 'comment', allowUsers: [], name: 'label' }]
 			await new Commands(testbed, commands, {
 				comment: '/label hello "hello world"',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).labels).to.include('hello')
 			expect((await testbed.getIssue()).labels).to.include('hello world')
 		})
 
 		it('adds assignees to issues with /assign comment', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [{ type: 'comment', allowUsers: [], name: 'assign' }]
 			await new Commands(testbed, commands, {
 				comment: '/assign Jackso \r\n',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).assignee).to.equal('Jackso')
 		})
 
 		it('removes labels with - prefix in /label comment', async () => {
 			const testbed = new TestbedIssue(
-				{ writers: ['JacksonKearl'] },
+				{ writers: ['wangyuan249'] },
 				{ labels: ['hello', 'hello world'] },
 			)
 			const commands: Command[] = [{ type: 'comment', allowUsers: [], name: 'label' }]
 			await new Commands(testbed, commands, {
 				comment: '/label -hello -"hello world" "-hello"',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).labels).not.to.include('hello')
 			expect((await testbed.getIssue()).labels).not.to.include('hello world')
@@ -217,13 +217,13 @@ describe('Commands', () => {
 
 		it('removes assignees with - prefix in /assign comment', async () => {
 			const testbed = new TestbedIssue(
-				{ writers: ['JacksonKearl'] },
-				{ issue: { assignee: 'JacksonKearl' } },
+				{ writers: ['wangyuan249'] },
+				{ issue: { assignee: 'wangyuan249' } },
 			)
 			const commands: Command[] = [{ type: 'comment', allowUsers: [], name: 'assign' }]
 			await new Commands(testbed, commands, {
-				comment: '/assign -JacksonKearl \r\n',
-				user: { name: 'JacksonKearl' },
+				comment: '/assign -wangyuan249 \r\n',
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).assignee).to.equal(undefined)
 		})
@@ -231,18 +231,18 @@ describe('Commands', () => {
 
 	describe('Labels', () => {
 		it('close', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [{ type: 'label', action: 'close', name: 'hello' }]
 
 			await new Commands(testbed, commands, {
 				label: 'hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 		})
 
 		it('Comments', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] })
 			const commands: Command[] = [
 				{
 					type: 'label',
@@ -254,7 +254,7 @@ describe('Commands', () => {
 
 			await new Commands(testbed, commands, {
 				label: 'hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 			const comments = []
@@ -265,7 +265,7 @@ describe('Commands', () => {
 		})
 
 		it('But doesnt comment when the issue was closed', async () => {
-			const testbed = new TestbedIssue({ writers: ['JacksonKearl'] }, { issue: { open: false } })
+			const testbed = new TestbedIssue({ writers: ['wangyuan249'] }, { issue: { open: false } })
 			const commands: Command[] = [
 				{
 					type: 'label',
@@ -277,7 +277,7 @@ describe('Commands', () => {
 
 			await new Commands(testbed, commands, {
 				label: 'hello',
-				user: { name: 'JacksonKearl' },
+				user: { name: 'wangyuan249' },
 			}).run()
 			expect((await testbed.getIssue()).open).to.equal(false)
 			const comments = []
@@ -298,10 +298,10 @@ describe('Commands', () => {
 			]
 			const testbed = new TestbedIssue(
 				{
-					writers: ['JacksonKearl'],
+					writers: ['wangyuan249'],
 				},
 				{
-					labels: ['old', 'veryOld'],
+					labels: ['old', 'veryOld', 'author/kubevela'],
 					pullRequestFilenames,
 				},
 			)
@@ -333,10 +333,10 @@ describe('Commands', () => {
 			]
 			const testbed = new TestbedIssue(
 				{
-					writers: ['JacksonKearl'],
+					writers: ['wangyuan249'],
 				},
 				{
-					labels: ['old', 'veryOld'],
+					labels: ['old', 'veryOld', 'author/kubevela'],
 					pullRequestFilenames,
 				},
 			)
@@ -364,19 +364,19 @@ describe('Commands', () => {
 		it('Labels not when author is not member of organization', async () => {
 			const testbed = new TestbedIssue(
 				{
-					writers: ['JacksonKearl'],
+					writers: ['wangyuan249'],
 					userMemberOfOrganization: false,
 				},
 				{
-					labels: ['old', 'veryOld'],
+					labels: ['old', 'veryOld', 'author/kubevela'],
 				},
 			)
 			const commands: Command[] = [
 				{
 					type: 'author',
-					name: 'Grafana author',
-					memberOf: { org: 'grafana' },
-					addLabel: 'new',
+					name: 'kubevela author',
+					memberOf: { org: 'oam-dev' },
+					addLabel: 'author/oam-dev',
 					removeLabel: 'old',
 				},
 			]
@@ -393,19 +393,19 @@ describe('Commands', () => {
 		it('Labels when author is member of organization', async () => {
 			const testbed = new TestbedIssue(
 				{
-					writers: ['JacksonKearl'],
+					writers: ['wangyuan249'],
 					userMemberOfOrganization: true,
 				},
 				{
-					labels: ['old', 'veryOld'],
+					labels: ['old', 'veryOld', 'author/kubevela'],
 				},
 			)
 			const commands: Command[] = [
 				{
 					type: 'author',
-					name: 'Grafana author',
-					memberOf: { org: 'grafana' },
-					addLabel: 'new',
+					name: 'kubevela author',
+					memberOf: { org: 'oam-dev' },
+					addLabel: 'author/kubevela',
 					removeLabel: 'old',
 				},
 			]
@@ -416,25 +416,25 @@ describe('Commands', () => {
 			await new Commands(testbed, commands, {}).run()
 
 			expect((await testbed.getIssue()).labels).not.to.contain('old')
-			expect((await testbed.getIssue()).labels).to.contain('new')
+			expect((await testbed.getIssue()).labels).to.contain('author/kubevela')
 		})
 
 		it('Labels not when author is member of organization', async () => {
 			const testbed = new TestbedIssue(
 				{
-					writers: ['JacksonKearl'],
+					writers: ['wangyuan249'],
 					userMemberOfOrganization: true,
 				},
 				{
-					labels: ['old', 'veryOld'],
+					labels: ['old', 'veryOld', 'author/kubevela'],
 				},
 			)
 			const commands: Command[] = [
 				{
 					type: 'author',
-					name: 'Grafana author',
-					notMemberOf: { org: 'grafana' },
-					addLabel: 'new',
+					name: 'kubevela author',
+					notMemberOf: { org: 'oam-dev' },
+					addLabel: 'author/kubevela',
 					removeLabel: 'old',
 				},
 			]
@@ -445,25 +445,25 @@ describe('Commands', () => {
 			await new Commands(testbed, commands, {}).run()
 
 			expect((await testbed.getIssue()).labels).to.contain('old')
-			expect((await testbed.getIssue()).labels).not.to.contain('new')
+			expect((await testbed.getIssue()).labels).to.contain('author/kubevela')
 		})
 
 		it('Labels when author is not member of organization', async () => {
 			const testbed = new TestbedIssue(
 				{
-					writers: ['JacksonKearl'],
+					writers: ['wangyuan249'],
 					userMemberOfOrganization: false,
 				},
 				{
-					labels: ['old', 'veryOld'],
+					labels: ['old', 'veryOld', 'author/kubevela'],
 				},
 			)
 			const commands: Command[] = [
 				{
 					type: 'author',
-					name: 'Grafana author',
-					notMemberOf: { org: 'grafana' },
-					addLabel: 'new',
+					name: 'kubevela author',
+					notMemberOf: { org: 'oam-dev' },
+					addLabel: 'author/kubevela',
 					removeLabel: 'old',
 				},
 			]
@@ -474,7 +474,7 @@ describe('Commands', () => {
 			await new Commands(testbed, commands, {}).run()
 
 			expect((await testbed.getIssue()).labels).not.to.contain('old')
-			expect((await testbed.getIssue()).labels).to.contain('new')
+			expect((await testbed.getIssue()).labels).to.contain('author/kubevela')
 		})
 	})
 })

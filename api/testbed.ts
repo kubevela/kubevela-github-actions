@@ -106,7 +106,7 @@ export class TestbedIssue extends Testbed implements GitHubIssue {
 		issueConfig.comments = issueConfig?.comments ?? []
 		issueConfig.labels = issueConfig?.labels ?? []
 		issueConfig.issue = {
-			author: { name: 'JacksonKearl' },
+			author: { name: 'wangyuan249' },
 			body: 'issue body',
 			locked: false,
 			numComments: issueConfig?.comments?.length || 0,
