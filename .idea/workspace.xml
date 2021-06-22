@@ -38,6 +38,9 @@
     <option name="context" value="kind-kind" />
     <option name="namespace" value="default" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1u2FFFASfUr4UTEoabLJNy8uMW8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
