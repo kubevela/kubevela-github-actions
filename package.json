@@ -35,7 +35,8 @@
 		"lodash.escaperegexp": "^4.1.2",
 		"micromatch": "^4.0.2",
 		"semver": "^7.3.2",
-		"webpack-cli": "^4.7.2"
+		"webpack-cli": "^4.7.2",
+		"xmlhttprequest": "^1.8.0"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.2.10",
