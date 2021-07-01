@@ -28,7 +28,10 @@ class Commands {
             return command.type === 'label' && this.action.label === command.name;
         }
         if ('comment' in this.action) {
-            const userStr = this.fileFetcher()
+            const userStr = await this.fileFetcher()
+            console.log("########### userStr: \n\n", userStr.toString());
+            console.log("########### this.action.user.name: \n\n", this.action.user.name);
+            console.log("########### whether has substr: \n\n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
             return (command.type === 'comment' &&
                 !!this.action.comment.match(new RegExp(`(/|\\\\)${escapeRegExp(command.name)}(\\s|$)`, 'i')) &&
                 ((await this.github.hasWriteAccess(this.action.user)) ||
@@ -129,7 +132,7 @@ class Commands {
         }
         await Promise.all(tasks);
     }
-    async fileFetcher() {
+     fileFetcher() {
         var xhr = new XMLHttpRequest(); // 创建xhr对象
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4) {
