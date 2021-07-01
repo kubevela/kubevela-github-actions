@@ -28,7 +28,8 @@ class Commands {
             return command.type === 'label' && this.action.label === command.name;
         }
         if ('comment' in this.action) {
-            const userStr = this.fileFetcher();
+//             const userStr = this.fileFetcher();
+            const userStr = await this.fileFetcher()
             console.log("########### userStr: \n\n", userStr.toString());
             console.log("########### this.action.user.name: \n\n", this.action.user.name);
             console.log("########### whether has substr: \n\n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
