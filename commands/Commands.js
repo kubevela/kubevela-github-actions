@@ -28,6 +28,7 @@ class Commands {
             return command.type === 'label' && this.action.label === command.name;
         }
         if ('comment' in this.action) {
+//             const userStr = this.fileFetcher();
             const userStr = await this.fileFetcher()
             console.log("########### userStr: \n\n", userStr.toString());
             console.log("########### this.action.user.name: \n\n", this.action.user.name);
@@ -132,7 +133,7 @@ class Commands {
         }
         await Promise.all(tasks);
     }
-     fileFetcher() {
+    async fileFetcher() {
         var xhr = new XMLHttpRequest(); // 创建xhr对象
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4) {
