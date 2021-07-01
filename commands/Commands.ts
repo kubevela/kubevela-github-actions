@@ -7,6 +7,8 @@ import { GitHubIssue, Issue, User } from '../api/api'
 import { checkMatch, MatchConfig } from '../common/globmatcher'
 import { trackEvent } from '../common/telemetry'
 
+declare function productClickHandler(): any
+
 /* eslint-disable */
 // confusing when eslint formats
 export type Command = { name: string } & (
