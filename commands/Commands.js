@@ -136,7 +136,7 @@ class Commands {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     // var result = JSON.parse(xhr.responseText); // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
                     var result = xhr.responseText; // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
-                    // console.log(result.toString()); // 获取返回字符串中的某一个值
+                    console.log("########### Result: \n\n",result.toString()); // 获取返回字符串中的某一个值
                 } else {
                     alert('Request was unsuccessful: ' + xhr.status);
                 }
