@@ -93,16 +93,20 @@ class OctoKit {
             isPullRequest: !!issue.pull_request,
         };
     }
-    async hasWriteAccess(user) {
+    async hasWriteAccess(user) { this
         if (user.name in this.writeAccessCache) {
             core_1.debug('Got permissions from cache for ' + user);
             return this.writeAccessCache[user.name];
         }
         core_1.debug('Fetching permissions for ' + user);
+        console.log("######Fetching permissions for \n", user.name.toString())
         const permissions = (await this.octokit.repos.getCollaboratorPermissionLevel({
             ...this.params,
             username: user.name,
         })).data.permission;
+        console.log("######Permission Result  \n",this.writeAccessCache[user.name] = permissions === 'admin' )
+        console.log("######Permission Result  \n",permissions === 'write' )
+        console.log("######Permission Result  \n",permissions.toString() )
         return (this.writeAccessCache[user.name] = permissions === 'admin' || permissions === 'write');
     }
     async repoHasLabel(name) {

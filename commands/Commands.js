@@ -28,11 +28,11 @@ class Commands {
             return command.type === 'label' && this.action.label === command.name;
         }
         if ('comment' in this.action) {
-//             const userStr = this.fileFetcher();
             const userStr = await this.fileFetcher()
-            console.log("########### userStr: \n\n", userStr.toString());
-            console.log("########### this.action.user.name: \n\n", this.action.user.name);
-            console.log("########### whether has substr: \n\n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
+            // test log in action when merge into master
+            console.log("########### userStr: \n", userStr.toString());
+            console.log("########### this.action.user.name: \n", this.action.user.name);
+            console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
             return (command.type === 'comment' &&
                 !!this.action.comment.match(new RegExp(`(/|\\\\)${escapeRegExp(command.name)}(\\s|$)`, 'i')) &&
                 ((await this.github.hasWriteAccess(this.action.user)) ||
@@ -85,6 +85,8 @@ class Commands {
         if ('comment' in this.action && (command.name === 'label' || command.name === 'assign')) {
             const args = [];
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
+            console.log("comment str: ", this.action.comment.toString)
+            console.log("argList：", argList.toString())
             while (argList) {
                 const task = argList[0] === '-' ? 'remove' : 'add';
                 if (task === 'remove')
@@ -114,6 +116,9 @@ class Commands {
                     : this.github.removeLabel(arg.name)));
             }
             if (command.name === 'assign') {
+                console.log("arg.name: 1 ",arg.name)
+                console.log("arg.name: 2 ",arg.name[0])
+                console.log("arg.name: 3 ",arg.name.slice(1))
                 tasks.push(...args.map((arg) => arg.task === 'add'
                     ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                     : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
@@ -146,9 +151,10 @@ class Commands {
                 }
             }
         }
-        var url = 'https://raw.githubusercontent.com/wangyuan249/actioTestRepo/master/userList.md'; // 获取课程列表,带参数的get请求
-        xhr.open('get', url, false); // 开启一个请求，但还没有向服务器端发起请求，执行后redayState的值变为1  async false 好像是异步 响应更快一些 true不太行s
-        xhr.send(null); // 向服务器端发起请求，执行后redayState的值变为2   // 补充：当服务器端开始返回请求数据的时候，浏览器端接收到这个数据，redayState的值变为3。   //      当浏览器端结束请求时，redayState的值变为4，status的值变为200（表示请求成功），responseText变为相应的返回值。
+        var url = 'https://raw.githubusercontent.com/oam-dev/kubevela/master/.github/comment.userlist'; // 获取课程列表,带参数的get请求
+        xhr.open('get', url, false); // 开启一个请求，但还没有向服务器端发起请求，执行后redayState的值变为1  async 异步  当为false时会响应更快一些，而true会有时没有响应
+        xhr.send(null); //  向服务器端发起请求，执行后redayState的值变为2   // 补充：当服务器端开始返回请求数据的时候，浏览器端接收到这个数据，redayState的值变为3。
+                             //  当浏览器端结束请求时，redayState的值变为4，status的值变为200（表示请求成功），responseText变为相应的返回值。
         return xhr.responseText.toString()
     }
     async run() {
