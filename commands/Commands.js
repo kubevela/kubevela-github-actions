@@ -30,7 +30,7 @@ class Commands {
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
             // test log in action when merge into master
-            console.log("########### userStr: \n", userStr.toString());
+            // console.log("########### userStr: \n", userStr.toString());
             console.log("########### this.action.user.name: \n", this.action.user.name);
             console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
             return (command.type === 'comment' &&
@@ -85,7 +85,9 @@ class Commands {
         if ('comment' in this.action && (command.name === 'label' || command.name === 'assign')) {
             const args = [];
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
-            console.log("comment str: ", this.action.comment.toString)
+            console.log("comment str1: ", this.action.comment.toString)
+            console.log("comment str2: ", this.action.comment.name)
+            console.log("comment str3: ", this.action.comment)
             console.log("argList：", argList.toString())
             while (argList) {
                 const task = argList[0] === '-' ? 'remove' : 'add';
@@ -116,9 +118,9 @@ class Commands {
                     : this.github.removeLabel(arg.name)));
             }
             if (command.name === 'assign') {
-                console.log("arg.name: 1 ",arg.name)
-                console.log("arg.name: 2 ",arg.name[0])
-                console.log("arg.name: 3 ",arg.name.slice(1))
+//                 console.log("arg.name: 1 ",arg.name)
+//                 console.log("arg.name: 2 ",arg.name[0])
+//                 console.log("arg.name: 3 ",arg.name.slice(1))
                 tasks.push(...args.map((arg) => arg.task === 'add'
                     ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                     : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
