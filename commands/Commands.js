@@ -77,15 +77,18 @@ class Commands {
     }
     async perform(command, issue, changedFiles) {
         var _a, _b;
-        if (!(await this.matches(command, issue, changedFiles)))
-            return;
+        if ('comment' in this.action && command.name === 'assign' ){
+            if (!(await this.matches(command, issue, changedFiles)))
+                return;
+        }
+
         console.log(`Running command ${command.name}:`);
         await telemetry_1.trackEvent(this.github, 'command', { name: command.name });
         const tasks = [];
         if ('comment' in this.action && (command.name === 'label' || command.name === 'assign')) {
             const args = [];
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
-            console.log("comment str: ", this.action.comment.toString)
+            console.log("comment str: ", this.action.comment.name)
             console.log("argList：", argList.toString())
             while (argList) {
                 const task = argList[0] === '-' ? 'remove' : 'add';
@@ -116,9 +119,9 @@ class Commands {
                     : this.github.removeLabel(arg.name)));
             }
             if (command.name === 'assign') {
-                console.log("arg.name: 1 ",arg.name)
-                console.log("arg.name: 2 ",arg.name[0])
-                console.log("arg.name: 3 ",arg.name.slice(1))
+                // console.log("arg.name: 1 ",arg.name)
+                // console.log("arg.name: 2 ",arg.name[0])
+                // console.log("arg.name: 3 ",arg.name.slice(1))
                 tasks.push(...args.map((arg) => arg.task === 'add'
                     ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                     : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
