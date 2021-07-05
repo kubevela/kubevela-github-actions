@@ -30,7 +30,7 @@ class Commands {
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
             // test log in action when merge into master
-            console.log("########### userStr: \n", userStr.toString());
+            // console.log("########### userStr: \n", userStr.toString());
             console.log("########### this.action.user.name: \n", this.action.user.name);
             console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
             return (command.type === 'comment' &&
@@ -77,10 +77,8 @@ class Commands {
     }
     async perform(command, issue, changedFiles) {
         var _a, _b;
-        if ('comment' in this.action && command.name === 'assign' ){
-            if (!(await this.matches(command, issue, changedFiles)))
-                return;
-        }
+        if (!(await this.matches(command, issue, changedFiles)))
+            return;
 
         console.log(`Running command ${command.name}:`);
         await telemetry_1.trackEvent(this.github, 'command', { name: command.name });
@@ -119,9 +117,6 @@ class Commands {
                     : this.github.removeLabel(arg.name)));
             }
             if (command.name === 'assign') {
-                // console.log("arg.name: 1 ",arg.name)
-                // console.log("arg.name: 2 ",arg.name[0])
-                // console.log("arg.name: 3 ",arg.name.slice(1))
                 tasks.push(...args.map((arg) => arg.task === 'add'
                     ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                     : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
@@ -148,7 +143,7 @@ class Commands {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     // var result = JSON.parse(xhr.responseText); // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
                     var result = xhr.responseText; // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
-                    console.log("########### Result: \n\n",result.toString()); // 获取返回字符串中的某一个值
+                    // console.log("########### Result: \n\n",result.toString()); // 获取返回字符串中的某一个值
                 } else {
                     alert('Request was unsuccessful: ' + xhr.status);
                 }
