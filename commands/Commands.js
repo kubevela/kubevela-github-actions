@@ -30,7 +30,7 @@ class Commands {
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
             // test log in action when merge into master
-            // console.log("########### userStr: \n", userStr.toString());
+            console.log("########### userStr: \n", userStr.toString());
             console.log("########### this.action.user.name: \n", this.action.user.name);
             console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
             return (command.type === 'comment' &&
