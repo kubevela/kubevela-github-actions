@@ -93,7 +93,7 @@ class OctoKit {
             isPullRequest: !!issue.pull_request,
         };
     }
-    async hasWriteAccess(user) { this
+    async hasWriteAccess(user) { 
         if (user.name in this.writeAccessCache) {
             core_1.debug('Got permissions from cache for ' + user);
             return this.writeAccessCache[user.name];
