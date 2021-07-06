@@ -30,7 +30,7 @@ class Commands {
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
             // test log in action when merge into master
-            console.log("Test in release 0.2 --data 0706")
+            console.log("Test in release 0.3 --data 0706")
             console.log("########### userStr: \n", userStr.toString());
             console.log("########### this.action.user.name: \n", this.action.user.name);
             console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
@@ -80,6 +80,7 @@ class Commands {
         var _a, _b;
         if (!(await this.matches(command, issue, changedFiles)))
             return;
+
         console.log(`Running command ${command.name}:`);
         await telemetry_1.trackEvent(this.github, 'command', { name: command.name });
         const tasks = [];
@@ -145,7 +146,7 @@ class Commands {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     // var result = JSON.parse(xhr.responseText); // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
                     var result = xhr.responseText; // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
-                    console.log("########### Result: \n\n",result.toString()); // 获取返回字符串中的某一个值
+                    // console.log("########### Result: \n\n",result.toString()); // 获取返回字符串中的某一个值
                 } else {
                     alert('Request was unsuccessful: ' + xhr.status);
                 }
