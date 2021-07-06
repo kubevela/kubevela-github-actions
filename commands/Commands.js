@@ -29,8 +29,9 @@ class Commands {
         }
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
-            // test log in action when merge into master
-            // console.log("########### userStr: \n", userStr.toString());
+            
+            console.log("Test in release 0.2 --data 0706")
+            console.log("########### userStr: \n", userStr.toString());
             console.log("########### this.action.user.name: \n", this.action.user.name);
             console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
             return (command.type === 'comment' &&
@@ -86,7 +87,11 @@ class Commands {
         if ('comment' in this.action && (command.name === 'label' || command.name === 'assign')) {
             const args = [];
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
-            console.log("comment str: ", this.action.comment.name)
+
+            console.log("comment str1: ", this.action.comment.toString)
+            console.log("comment str2: ", this.action.comment.name)
+            console.log("comment str3: ", this.action.comment)
+
             console.log("argList：", argList.toString())
             while (argList) {
                 const task = argList[0] === '-' ? 'remove' : 'add';
