@@ -108,6 +108,7 @@ class OctoKit {
         console.log("######Permission Result  \n",permissions === 'write' )
         console.log("######Permission Result  \n",permissions.toString() )
         return (this.writeAccessCache[user.name] = permissions === 'admin' || permissions === 'write');
+
     }
     async repoHasLabel(name) {
         try {
