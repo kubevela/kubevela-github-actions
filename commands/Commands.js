@@ -30,7 +30,7 @@ class Commands {
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
             // test log in action when merge into master
-            console.log("Test in release 0.3")
+            console.log("Test in release 0.2 --data 0706")
             console.log("########### userStr: \n", userStr.toString());
             console.log("########### this.action.user.name: \n", this.action.user.name);
             console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
@@ -119,9 +119,6 @@ class Commands {
                     : this.github.removeLabel(arg.name)));
             }
             if (command.name === 'assign') {
-//                 console.log("arg.name: 1 ",arg.name)
-//                 console.log("arg.name: 2 ",arg.name[0])
-//                 console.log("arg.name: 3 ",arg.name.slice(1))
                 tasks.push(...args.map((arg) => arg.task === 'add'
                     ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                     : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
