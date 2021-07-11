@@ -119,10 +119,15 @@ class Commands {
                     ? this.github.addLabel(arg.name)
                     : this.github.removeLabel(arg.name)));
             }
-            if (command.name === 'assign') {
-                tasks.push(...args.map((arg) => arg.task === 'add'
-                    ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
-                    : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
+
+            if (command.name === 'assign'){
+                if(argList === ''){
+                    tasks.push(this.github.addAssignee(this.action.user.name));
+                }else{
+                    tasks.push(...args.map((arg) => arg.task === 'add'
+                        ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
+                        : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
+                }
             }
         }
         if (command.action === 'close') {
