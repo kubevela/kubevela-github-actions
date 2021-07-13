@@ -29,7 +29,6 @@ class Commands {
         }
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
-            console.log("Info username: \n", userStr.toString());
             console.log("Info action.username: \n", this.action.user.name);
             return (command.type === 'comment' &&
                 !!this.action.comment.match(new RegExp(`(/|\\\\)${escapeRegExp(command.name)}(\\s|$)`, 'i')) &&
@@ -84,7 +83,6 @@ class Commands {
         if ('comment' in this.action && (command.name === 'label' || command.name === 'assign')) {
             const args = [];
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
-            console.log("Info comment name: ", this.action.comment.name)
             console.log("Info comment: ", this.action.comment)
             console.log("Info argList：", argList.toString())
             while (argList) {
@@ -117,8 +115,6 @@ class Commands {
                     : this.github.removeLabel(arg.name)));
             }
 
-            console.log("Info argList flag1：", argList == '')
-            console.log("Info argList flag2：", argList === '')
             if (command.name === 'assign'){
                 if(argList === ''){
                     tasks.push(this.github.addAssignee(this.action.user.name));
