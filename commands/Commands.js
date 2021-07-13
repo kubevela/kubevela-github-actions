@@ -29,11 +29,7 @@ class Commands {
         }
         if ('comment' in this.action) {
             const userStr = await this.fileFetcher()
-            // test log in action when merge into master
-            console.log("Test in release 0.2 --data 0706")
-            console.log("########### userStr: \n", userStr.toString());
-            console.log("########### this.action.user.name: \n", this.action.user.name);
-            console.log("########### whether has substr: \n", userStr.toString().includes(this.action.user.name)); // 获取返回字符串中的某一个值
+            console.log("Info action.username: \n", this.action.user.name);
             return (command.type === 'comment' &&
                 !!this.action.comment.match(new RegExp(`(/|\\\\)${escapeRegExp(command.name)}(\\s|$)`, 'i')) &&
                 ((await this.github.hasWriteAccess(this.action.user)) ||
@@ -87,10 +83,8 @@ class Commands {
         if ('comment' in this.action && (command.name === 'label' || command.name === 'assign')) {
             const args = [];
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
-            console.log("comment str1: ", this.action.comment.toString)
-            console.log("comment str2: ", this.action.comment.name)
-            console.log("comment str3: ", this.action.comment)
-            console.log("argList：", argList.toString())
+            console.log("Info comment: ", this.action.comment)
+            console.log("Info argList：", argList.toString())
             while (argList) {
                 const task = argList[0] === '-' ? 'remove' : 'add';
                 if (task === 'remove')
@@ -114,15 +108,21 @@ class Commands {
                     }
                 }
             }
+
             if (command.name === 'label') {
                 tasks.push(...args.map((arg) => arg.task === 'add'
                     ? this.github.addLabel(arg.name)
                     : this.github.removeLabel(arg.name)));
             }
-            if (command.name === 'assign') {
-                tasks.push(...args.map((arg) => arg.task === 'add'
-                    ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
-                    : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
+
+            if (command.name === 'assign'){
+                if(argList === ''){
+                    tasks.push(this.github.addAssignee(this.action.user.name));
+                }else{
+                    tasks.push(...args.map((arg) => arg.task === 'add'
+                        ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
+                        : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
+                }
             }
         }
         if (command.action === 'close') {
@@ -146,7 +146,6 @@ class Commands {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     // var result = JSON.parse(xhr.responseText); // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
                     var result = xhr.responseText; // 将字符串转化为对象，然后才能获取到返回字符串中的某一个值
-                    // console.log("########### Result: \n\n",result.toString()); // 获取返回字符串中的某一个值
                 } else {
                     alert('Request was unsuccessful: ' + xhr.status);
                 }
