@@ -115,6 +115,7 @@ class Commands {
                     ? this.github.addLabel(arg.name)
                     : this.github.removeLabel(arg.name)));
             }
+
             console.log("Info argListCopy：", argListCopy.toString())
             if (command.name === 'assign'){
                 if(argListCopy === ''){
