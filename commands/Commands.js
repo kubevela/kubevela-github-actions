@@ -114,11 +114,14 @@ class Commands {
                     ? this.github.addLabel(arg.name)
                     : this.github.removeLabel(arg.name)));
             }
-
+            console.log("Info parse comment: ", this.action.comment)
+            console.log("Info parse argList: ", argList.toString())
+            console.log("Info condition：", command.name === 'assign')
             if (command.name === 'assign'){
                 if(argList === ''){
                     tasks.push(this.github.addAssignee(this.action.user.name));
                 }else{
+                    console.log("Info arg name：", arg.name)
                     tasks.push(...args.map((arg) => arg.task === 'add'
                         ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                         : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
