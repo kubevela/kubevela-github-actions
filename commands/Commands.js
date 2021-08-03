@@ -85,6 +85,7 @@ class Commands {
             let argList = ((_b = (_a = this.action.comment.match(new RegExp(String.raw `(?:\\|/)${command.name}(.*)(?:\r)?(?:\n|$)`))) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : '').trim();
             console.log("Info comment: ", this.action.comment)
             console.log("Info argList：", argList.toString())
+            const argListCopy = argList
             while (argList) {
                 const task = argList[0] === '-' ? 'remove' : 'add';
                 if (task === 'remove')
@@ -114,14 +115,11 @@ class Commands {
                     ? this.github.addLabel(arg.name)
                     : this.github.removeLabel(arg.name)));
             }
-            console.log("Info parse comment: ", this.action.comment)
-            console.log("Info parse argList: ", argList.toString())
-            console.log("Info condition：", command.name === 'assign')
+            console.log("Info argListCopy：", argListCopy.toString())
             if (command.name === 'assign'){
-                if(argList === ''){
+                if(argListCopy === ''){
                     tasks.push(this.github.addAssignee(this.action.user.name));
                 }else{
-                    console.log("Info arg name：", arg.name)
                     tasks.push(...args.map((arg) => arg.task === 'add'
                         ? this.github.addAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)
                         : this.github.removeAssignee(arg.name[0] === '@' ? arg.name.slice(1) : arg.name)));
