@@ -5,7 +5,7 @@ node_modules
 .env
 
 # editor and IDE paraphernalia
-.idea
+.idea/
 *.swp
 *.swo
 *~
