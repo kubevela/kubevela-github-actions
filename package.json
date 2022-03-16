@@ -29,6 +29,7 @@
 		"@types/semver": "^7.3.4",
 		"axios": "^0.21.1",
 		"dotenv": "^8.2.0",
+		"is-plain-object": "^5.0.0",
 		"json-parse": "^1.0.3",
 		"json-parse-even-better-errors": "^2.3.1",
 		"lodash": "^4.17.20",
